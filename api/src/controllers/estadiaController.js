@@ -13,8 +13,6 @@ module.exports = {
   async create(req, res) {
     try {
       const { veiculoId, valorHora } = req.body
-      // entrada gerada automaticamente pelo banco via @default(now())
-      // saida e valorTotal ficam nulos até o veículo sair
       const estadia = await prisma.estadia.create({
         data: {
           veiculoId: Number(veiculoId),
@@ -41,7 +39,7 @@ module.exports = {
       if (saida) {
         const entrada = new Date(estadiaAtual.entrada)
         const saidaDate = new Date(saida)
-        const horas = (saidaDate - entrada) / (1000 * 60 * 60) // diferença em horas
+        const horas = (saidaDate - entrada) / (1000 * 60 * 60) 
         valorTotal = vH * horas
       }
 
